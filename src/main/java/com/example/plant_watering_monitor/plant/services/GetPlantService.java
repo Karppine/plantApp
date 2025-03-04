@@ -1,6 +1,7 @@
 package com.example.plant_watering_monitor.plant.services;
 
 import com.example.plant_watering_monitor.Query;
+import com.example.plant_watering_monitor.exceptions.PlantNotFoundException;
 import com.example.plant_watering_monitor.plant.PlantRepository;
 import com.example.plant_watering_monitor.plant.model.PlantDTO;
 import com.example.plant_watering_monitor.plant.model.Plant;
@@ -27,6 +28,6 @@ public class GetPlantService implements Query<Integer, PlantDTO> {
             return ResponseEntity.ok(new PlantDTO(plantOptional.get()));
         }
 
-        return null;
+        throw new PlantNotFoundException();
     }
 }

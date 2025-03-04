@@ -1,6 +1,7 @@
 package com.example.plant_watering_monitor.plant.services;
 
 import com.example.plant_watering_monitor.Command;
+import com.example.plant_watering_monitor.exceptions.PlantNotFoundException;
 import com.example.plant_watering_monitor.plant.PlantRepository;
 import com.example.plant_watering_monitor.plant.model.Plant;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,6 @@ public class DeletePlantService implements Command<Integer, Void> {
             plantRepository.deleteById(id);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
-        return null;
+        throw new PlantNotFoundException();
     }
 }

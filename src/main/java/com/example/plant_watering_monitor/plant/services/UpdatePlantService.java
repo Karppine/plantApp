@@ -1,6 +1,7 @@
 package com.example.plant_watering_monitor.plant.services;
 
 import com.example.plant_watering_monitor.Command;
+import com.example.plant_watering_monitor.exceptions.PlantNotFoundException;
 import com.example.plant_watering_monitor.plant.PlantRepository;
 import com.example.plant_watering_monitor.plant.model.PlantDTO;
 import com.example.plant_watering_monitor.plant.model.Plant;
@@ -30,7 +31,7 @@ public class UpdatePlantService implements Command<UpdatePlantCommand, PlantDTO>
             plantRepository.save(plant);
             return ResponseEntity.ok(new PlantDTO(plant));
         }
-        return null;
+        throw new PlantNotFoundException();
     }
 }
 
