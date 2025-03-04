@@ -1,7 +1,12 @@
 package com.example.plant_watering_monitor.exceptions;
 
+import lombok.Getter;
+
+@Getter
 public enum ErrorMessages {
-    PLANT_NOT_FOUND("plant not found");
+    PLANT_NOT_FOUND("plant not found"),
+    NAME_REQUIRED("Name is required"),
+    DESCRIPTION_LENGTH("Description mus be over 20 characters");
 
     private final String message;
 

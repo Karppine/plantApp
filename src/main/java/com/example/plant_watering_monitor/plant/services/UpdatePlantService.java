@@ -6,6 +6,7 @@ import com.example.plant_watering_monitor.plant.PlantRepository;
 import com.example.plant_watering_monitor.plant.model.PlantDTO;
 import com.example.plant_watering_monitor.plant.model.Plant;
 import com.example.plant_watering_monitor.plant.model.UpdatePlantCommand;
+import com.example.plant_watering_monitor.plant.validators.PlantValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,9 @@ public class UpdatePlantService implements Command<UpdatePlantCommand, PlantDTO>
         if (plantOptional.isPresent()) {
             Plant plant = command.getPlant();
             plant.setId(command.getId());
+
+            //changed to spring boot starter validation
+            //PlantValidator.execute(plant);
 
             plantRepository.save(plant);
             return ResponseEntity.ok(new PlantDTO(plant));
