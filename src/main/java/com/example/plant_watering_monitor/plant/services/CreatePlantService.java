@@ -25,7 +25,7 @@ public class CreatePlantService implements Command<Plant, PlantDTO> {
     @Override
     public ResponseEntity<PlantDTO> execute(Plant plant) {
 
-        //changed to spring boot starter validation
+        //changed to spring boot starter validation: defined in the model/plant using @annotations
         //PlantValidator.execute(plant);
 
         Plant savedPlant = plantRepository.save(plant);

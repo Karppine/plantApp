@@ -29,7 +29,7 @@ public class UpdatePlantService implements Command<UpdatePlantCommand, PlantDTO>
             Plant plant = command.getPlant();
             plant.setId(command.getId());
 
-            //changed to spring boot starter validation
+            //changed to spring boot starter validation: defined in the model/plant using @annotations
             //PlantValidator.execute(plant);
 
             plantRepository.save(plant);
