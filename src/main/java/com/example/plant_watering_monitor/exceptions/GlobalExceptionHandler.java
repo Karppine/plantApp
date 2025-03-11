@@ -31,21 +31,19 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {
-
+    /*
+        Sama kuin alla mutta ilman annotaatioita
+        @ExceptionHandler(PlantNotFoundException.class)
+        public ResponseEntity<ErrorResponse> handlePlantNotFoundException(PlantNotFoundException exception) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(exception.getMessage()));
+        }
+    */
     @ExceptionHandler(PlantNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
     public ErrorResponse handlePlantNotFoundException(PlantNotFoundException exception) {
         return new ErrorResponse(exception.getMessage());
     }
-
-    /*
-    Sama kuin yllä mutta ilman annotaatioita
-    @ExceptionHandler(PlantNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handlePlantNotFoundException(PlantNotFoundException exception) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(exception.getMessage()));
-    }
-    */
 
     @ExceptionHandler(PlantNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -58,6 +56,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ErrorResponse handlePlantNotValidConstraints(ConstraintViolationException exception) {
+        // just returns the first error, not all of them
         return new ErrorResponse(exception.getConstraintViolations().iterator().next().getMessage());
     }
 
