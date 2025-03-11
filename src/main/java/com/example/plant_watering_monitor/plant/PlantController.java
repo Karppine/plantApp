@@ -19,6 +19,8 @@ public class PlantController {
 
     private final GetPlantService getPlantService;
 
+    private final SearchPlantService searchPlantService;
+
     private final UpdatePlantService updatePlantService;
 
     private final DeletePlantService deletePlantService;
@@ -27,11 +29,13 @@ public class PlantController {
     public PlantController(CreatePlantService createPlantService,
                            GetPlantsService getPlantsService,
                            GetPlantService getPlantService,
+                           SearchPlantService searchPlantService,
                            UpdatePlantService updatePlantService,
                            DeletePlantService deletePlantService) {
         this.createPlantService = createPlantService;
         this.getPlantsService = getPlantsService;
         this.getPlantService = getPlantService;
+        this.searchPlantService = searchPlantService;
         this.updatePlantService = updatePlantService;
         this.deletePlantService = deletePlantService;
     }
@@ -50,6 +54,11 @@ public class PlantController {
     @GetMapping("/plant/{id}")
     public ResponseEntity<PlantDTO> getPlantById(@PathVariable Integer id) {
         return getPlantService.execute(id);
+    }
+
+    @GetMapping("/plant/search")
+    public ResponseEntity<List<PlantDTO>> searchPlantByName(@RequestParam String name) {
+        return searchPlantService.execute(name);
     }
 
     @PutMapping("/plant/{id}")
