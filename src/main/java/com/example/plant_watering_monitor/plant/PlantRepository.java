@@ -18,8 +18,7 @@ public interface PlantRepository extends JpaRepository<Plant, Integer> {
     List<Plant> findByNameContaining(String name);
 
     //JPQL Java Persistence Query Language (
-    @Query("SELECT p FROM Plant WHERE p.name LIKE %:keyword% OR p.description LIKE %:keyword%")
+    @Query("SELECT p FROM Plant p WHERE p.name LIKE %:keyword% OR p.description LIKE %:keyword%")
     List<Plant> findByNameOrDescriptionContaining(@Param("keyword") String input);
-
 
 }
