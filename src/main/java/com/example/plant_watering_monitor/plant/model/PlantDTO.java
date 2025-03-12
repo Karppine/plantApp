@@ -1,5 +1,7 @@
 package com.example.plant_watering_monitor.plant.model;
 
+import java.util.Objects;
+
 // luokan tarkoitus trimmata taulukosta turhia atribuutteja joita ei tarvitse paluattaa http vastauksessa
 // @Data lombok broken in intellij
 public class PlantDTO {
@@ -25,5 +27,18 @@ public class PlantDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PlantDTO plantDTO = (PlantDTO) o;
+        return Objects.equals(id, plantDTO.id) && Objects.equals(name, plantDTO.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 }
