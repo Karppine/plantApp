@@ -7,10 +7,12 @@ import java.util.Objects;
 public class PlantDTO {
     private Integer id;
     private String name;
+    private String description;
 
     public PlantDTO(Plant plant) {
         this.id = plant.getId();
         this.name = plant.getName();
+        this.description = plant.getDescription();
     }
 
     public Integer getId() {
@@ -27,6 +29,14 @@ public class PlantDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     @Override
