@@ -24,7 +24,5 @@ public class SearchPlantService implements Query<String, List<PlantDTO>> {
                 .stream()
                 .map(PlantDTO::new)
                 .toList());
-
-
     }
 }
