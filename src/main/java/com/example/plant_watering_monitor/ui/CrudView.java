@@ -1,4 +1,4 @@
-package com.example.plant_watering_monitor;
+package com.example.plant_watering_monitor.ui;
 
 
 import com.example.plant_watering_monitor.plant.PlantController;
