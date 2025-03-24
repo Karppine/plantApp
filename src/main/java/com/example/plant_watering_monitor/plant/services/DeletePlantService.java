@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class DeletePlantService implements Command<Integer, Void> {
 
-    PlantRepository plantRepository;
+    private final PlantRepository plantRepository;
 
     public DeletePlantService(PlantRepository plantRepository) {
         this.plantRepository = plantRepository;
