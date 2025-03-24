@@ -1,0 +1,8 @@
+Annotaatioilla saisi helposti luotua näkymän jossa tietoa kasveista -> kaikki taulun atribuutit sekä relaatiotaulun kastelut listana.
+
+Sama homma käyttäjissä -> helppo saada käyttäjän kaikki kastelut.
+
+Molemmat perjaattessa liittyy kasteluihin mutta tietojen haku tapahtuisi UserRepository ja PlantRepository kautta. Mihin nää kannattaisi projektissa sijoittaa, entä millaset api endpointit.
+
+
+kasvissa kannattaa varmaan olla ON DELETE CASCADE, mutta käyttäjissä ei.

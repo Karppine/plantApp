@@ -21,4 +21,6 @@ public interface PlantRepository extends JpaRepository<Plant, Integer> {
     @Query("SELECT p FROM Plant p WHERE p.name LIKE %:keyword% OR p.description LIKE %:keyword%")
     List<Plant> findByNameOrDescriptionContaining(@Param("keyword") String input);
 
+    // select user.name, watering_day, plant.name from watering, user, plant where plant.id = watering.plantId and user.id = watering.userId;
+
 }
