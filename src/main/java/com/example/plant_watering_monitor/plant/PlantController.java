@@ -2,7 +2,6 @@ package com.example.plant_watering_monitor.plant;
 
 
 import com.example.plant_watering_monitor.plant.model.Plant;
-import com.example.plant_watering_monitor.plant.model.PlantDTO;
 import com.example.plant_watering_monitor.plant.model.UpdatePlantCommand;
 import com.example.plant_watering_monitor.plant.services.*;
 import org.springframework.http.ResponseEntity;
@@ -40,29 +39,28 @@ public class PlantController {
         this.deletePlantService = deletePlantService;
     }
 
-
     @PostMapping("/plant")
-    public ResponseEntity<PlantDTO> createPlant(@RequestBody Plant plant) {
+    public ResponseEntity<Plant> createPlant(@RequestBody Plant plant) {
         return createPlantService.execute(plant);
     }
 
     @GetMapping("/plants")
-    public ResponseEntity<List<PlantDTO>> getPlants() {
+    public ResponseEntity<List<Plant>> getPlants() {
         return getPlantsService.execute(null);
     }
 
     @GetMapping("/plant/{id}")
-    public ResponseEntity<PlantDTO> getPlantById(@PathVariable Integer id) {
+    public ResponseEntity<Plant> getPlantById(@PathVariable Integer id) {
         return getPlantService.execute(id);
     }
 
     @GetMapping("/plant/search")
-    public ResponseEntity<List<PlantDTO>> searchPlantByName(@RequestParam String name) {
+    public ResponseEntity<List<Plant>> searchPlantByName(@RequestParam String name) {
         return searchPlantService.execute(name);
     }
 
     @PutMapping("/plant/{id}")
-    public ResponseEntity<PlantDTO> updatePlant(@PathVariable Integer id, @RequestBody Plant plant) {
+    public ResponseEntity<Plant> updatePlant(@PathVariable Integer id, @RequestBody Plant plant) {
         // execute only takes one parameter so we use a "container" class to pass two params
         return updatePlantService.execute(new UpdatePlantCommand(id, plant));
     }

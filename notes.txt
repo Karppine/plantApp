@@ -6,3 +6,51 @@ Molemmat perjaattessa liittyy kasteluihin mutta tietojen haku tapahtuisi UserRep
 
 
 kasvissa kannattaa varmaan olla ON DELETE CASCADE, mutta käyttäjissä ei.
+
+
+
+LISÄÄ TRIGGERI MYSQL KANTAAN
+
+
+
+Käyttöliittymä: (ainaki nyt alkuun että saadan toimimana, ei mitään authia)
+
+-käyttäjä -> ei tarvi omaa näkymää
+
+-kasvit -> päänäkymä, listä kasveista ja niiden tiedoista (nimi, viimeinen kastelu/lannoitus, kuvaus), NAPPI jolla lisätä kastelu.
+
+--> nappula ottaa kasvin/kasvien id:n , ja kysyy oliko lannotetta mukana.
+
+
+
+-kastelut -> ei tarvetta omalle näkymälle alussa. kastelutauluun lisätään monikoita kasvinäkymän nappulasta.
+
+
+
+kastelu modelista puuttuu validointi
+
+
+https://www.mysqltutorial.org/mysql-triggers/mysql-after-insert-trigger/
+https://www.mysqltutorial.org/mysql-stored-procedure/mysql-delimiter/
+
+DELIMITER $$
+
+CREATE TRIGGER update_plant_on_watering
+AFTER INSERT ON watering
+FOR EACH ROW
+BEGIN
+    UPDATE plant
+    SET last_watered = NEW.watering_day
+    WHERE id = NEW.plantId;
+
+    IF NEW.fertilizer THEN
+        UPDATE plant
+        SET last_fertilized = NEW.watering_day
+        WHERE id = NEW.plantId;
+    END IF;
+END$$
+
+DELIMITER;
+
+trigger lisätty ja toimii!!
+

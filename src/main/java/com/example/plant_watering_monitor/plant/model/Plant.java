@@ -7,10 +7,9 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Entity // maps java class to mysql
-//@Data tämä annotaatio lisäisi getterit ja setterit automaattisesti mutta tässää intellij versiossa se on rikki
+@Data
 @Table(name = "plant")
 public class Plant {
-
     @Id //mysql key parameter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -25,29 +24,10 @@ public class Plant {
     @Column(name = "description")
     private String description;
 
-    public Plant() {};
+    @Column(name = "last_watered")
+    private String last_watered;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    @Column(name = "last_fertilized")
+    private String last_fertilized;
 }
+

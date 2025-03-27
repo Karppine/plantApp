@@ -3,7 +3,6 @@ package com.example.plant_watering_monitor.plant.services;
 import com.example.plant_watering_monitor.Query;
 import com.example.plant_watering_monitor.plant.PlantRepository;
 import com.example.plant_watering_monitor.plant.model.Plant;
-import com.example.plant_watering_monitor.plant.model.PlantDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class GetPlantsService implements Query<Void, List<PlantDTO>> {
+public class GetPlantsService implements Query<Void, List<Plant>> {
 
     private final PlantRepository plantRepository;
 
@@ -20,10 +19,11 @@ public class GetPlantsService implements Query<Void, List<PlantDTO>> {
     }
 
     @Override
-    public ResponseEntity<List<PlantDTO>> execute(Void input) {
+    public ResponseEntity<List<Plant>> execute(Void input) {
         List<Plant> plants = plantRepository.findAll();
-        List<PlantDTO> plantDTOS = plants.stream().map(PlantDTO::new).toList();
 
-        return ResponseEntity.status(HttpStatus.OK).body(plantDTOS);
+        return ResponseEntity.status(HttpStatus.OK).body(plants);
     }
+
+
 }
