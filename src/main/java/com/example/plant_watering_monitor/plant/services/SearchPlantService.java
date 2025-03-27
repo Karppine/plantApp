@@ -2,14 +2,14 @@ package com.example.plant_watering_monitor.plant.services;
 
 import com.example.plant_watering_monitor.Query;
 import com.example.plant_watering_monitor.plant.PlantRepository;
-import com.example.plant_watering_monitor.plant.model.PlantDTO;
+import com.example.plant_watering_monitor.plant.model.Plant;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class SearchPlantService implements Query<String, List<PlantDTO>> {
+public class SearchPlantService implements Query<String, List<Plant>> {
 
     private final PlantRepository plantRepository;
 
@@ -18,11 +18,8 @@ public class SearchPlantService implements Query<String, List<PlantDTO>> {
     }
 
     @Override
-    public ResponseEntity<List<PlantDTO>> execute(String name) {
+    public ResponseEntity<List<Plant>> execute(String name) {
         // JPA method
-        return ResponseEntity.ok(plantRepository.findByNameContaining(name)
-                .stream()
-                .map(PlantDTO::new)
-                .toList());
+        return ResponseEntity.ok(plantRepository.findByNameContaining(name));
     }
 }
