@@ -1,6 +1,7 @@
 package com.example.plant_watering_monitor.watering.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -15,9 +16,11 @@ public class Watering {
     private Integer id;
 
     @Column(name = "plantId")
+    @NotNull
     private Integer plantId;
 
     @Column(name = "userId")
+    @NotNull
     private Integer userId;
 
    /* @ManyToOne

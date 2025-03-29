@@ -9,13 +9,11 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
-import jakarta.annotation.security.PermitAll;
 import org.springframework.context.annotation.Scope;
 
 @SpringComponent
 @Scope("prototype")
-@PermitAll
-@Route("")
+@Route(value = "Plant info", layout = MainLayout.class)
 public class PlantView extends VerticalLayout {
     Grid<Plant> grid = new Grid<>(Plant.class);
     PlantForm form;
@@ -24,7 +22,7 @@ public class PlantView extends VerticalLayout {
 
     public PlantView(PlantController plantRepo) {
         this.plantRepo = plantRepo;
-        addClassName("list-view");
+
         setSizeFull();
         configureGrid();
         configureForm();
@@ -46,25 +44,25 @@ public class PlantView extends VerticalLayout {
     private void configureForm() {
         form = new PlantForm();
         form.setWidth("25em");
-        form.addSaveListener(this::saveContact); // <1>
-        form.addDeleteListener(this::deleteContact); // <2>
+        form.addSaveListener(this::savePlant); // <1>
+        form.addDeleteListener(this::deletePlant); // <2>
         form.addCloseListener(e -> closeEditor()); // <3>
     }
 
-    private void saveContact(PlantForm.SaveEvent event) {
+    private void savePlant(PlantForm.SaveEvent event) {
         plantRepo.createPlant(event.getPlant());
         updateList();
         closeEditor();
     }
 
-    private void deleteContact(PlantForm.DeleteEvent event) {
+    private void deletePlant(PlantForm.DeleteEvent event) {
         plantRepo.deletePlant(event.getPlant().getId());
         updateList();
         closeEditor();
     }
 
     private void configureGrid() {
-        grid.addClassNames("contact-grid");
+        grid.addClassNames("plant-grid");
         grid.setSizeFull();
         grid.setColumns("name", "description", "last_watered", "last_fertilized");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
@@ -74,10 +72,10 @@ public class PlantView extends VerticalLayout {
     }
 
     private Component getToolbar() {
-        Button addContactButton = new Button("Add plant");
-        addContactButton.addClickListener(click -> addContact());
+        Button addPlantButton = new Button("Add plant");
+        addPlantButton.addClickListener(click -> addPlant());
 
-        var toolbar = new HorizontalLayout(addContactButton);
+        var toolbar = new HorizontalLayout(addPlantButton);
         toolbar.addClassName("toolbar");
         return toolbar;
     }
@@ -98,7 +96,7 @@ public class PlantView extends VerticalLayout {
         removeClassName("editing");
     }
 
-    private void addContact() {
+    private void addPlant() {
         grid.asSingleSelect().clear();
         editPlant(new Plant());
     }

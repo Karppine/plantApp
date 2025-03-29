@@ -29,6 +29,10 @@ Käyttöliittymä: (ainaki nyt alkuun että saadan toimimana, ei mitään authia
 
 kastelu modelista puuttuu validointi
 
+plantView:issa osa metodeista hassun nimisä.
+
+
+
 
 https://www.mysqltutorial.org/mysql-triggers/mysql-after-insert-trigger/
 https://www.mysqltutorial.org/mysql-stored-procedure/mysql-delimiter/

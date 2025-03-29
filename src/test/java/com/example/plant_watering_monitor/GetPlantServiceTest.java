@@ -3,7 +3,6 @@ package com.example.plant_watering_monitor;
 import com.example.plant_watering_monitor.exceptions.PlantNotFoundException;
 import com.example.plant_watering_monitor.plant.PlantRepository;
 import com.example.plant_watering_monitor.plant.model.Plant;
-import com.example.plant_watering_monitor.plant.model.PlantDTO;
 import com.example.plant_watering_monitor.plant.services.GetPlantService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,10 +43,10 @@ public class GetPlantServiceTest {
         when(plantRepository.findById(1)).thenReturn(Optional.of(plant));
 
         //When
-        ResponseEntity<PlantDTO> response = getPlantService.execute(1);
+        ResponseEntity<Plant> response = getPlantService.execute(1);
 
         //Then
-        assertEquals(ResponseEntity.ok(new PlantDTO(plant)), response);
+        assertEquals(ResponseEntity.ok(plant), response);
         //asserts the product repository was only called once
         verify(plantRepository, times(1)).findById(1);
     }

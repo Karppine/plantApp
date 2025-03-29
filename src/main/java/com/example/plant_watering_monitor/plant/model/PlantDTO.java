@@ -1,9 +1,9 @@
 package com.example.plant_watering_monitor.plant.model;
 
-import lombok.Data;
-
 // luokan tarkoitus trimmata taulukosta turhia atribuutteja joita ei tarvitse paluattaa http vastauksessa
 // hetken oli käytössä mutta revin sen irti jotta @Entity kautta saadaan autobindaukset ui:seen
+/*
+
 @Data
 public class PlantDTO {
     private Integer id;
@@ -22,3 +22,4 @@ public class PlantDTO {
 
     public PlantDTO(){};
 }
+*/
