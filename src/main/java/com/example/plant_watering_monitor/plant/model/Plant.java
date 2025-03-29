@@ -1,10 +1,13 @@
 package com.example.plant_watering_monitor.plant.model;
 
+import com.example.plant_watering_monitor.watering.model.Watering;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity // maps java class to mysql
 @Data
@@ -29,5 +32,13 @@ public class Plant {
 
     @Column(name = "last_fertilized")
     private String last_fertilized;
+
+    @OneToMany
+    @JoinColumn(name = "id")
+    private List<Watering> waterings;
+
+    //private String watered;
+
+
 }
 
