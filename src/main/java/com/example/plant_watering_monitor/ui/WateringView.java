@@ -6,6 +6,7 @@ import com.example.plant_watering_monitor.watering.WateringController;
 import com.example.plant_watering_monitor.watering.model.Watering;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -25,6 +26,7 @@ public class WateringView extends VerticalLayout {
     Set<Plant> selectedPlants;
 
     Button waterSelectedPlantsBtn = new Button("Water");
+    Checkbox fertilizerUse = new Checkbox("Use fertilizer");
 
 
     private final PlantController plantRepo;
@@ -52,7 +54,7 @@ public class WateringView extends VerticalLayout {
 
         // define fertilize button
 
-        return new HorizontalLayout(waterSelectedPlantsBtn);
+        return new HorizontalLayout(waterSelectedPlantsBtn, fertilizerUse);
     }
 
     // this is probably not error proof
@@ -62,11 +64,12 @@ public class WateringView extends VerticalLayout {
             watering.setPlantId(plant.getId());
             watering.setUserId(1);
             watering.setWatering_day(LocalDate.now());
-            watering.setFertilizer(true);
+            watering.setFertilizer(fertilizerUse.getValue());
             wateringRepo.createWatering(watering);
         }
         updateList();
         grid.deselectAll();
+        fertilizerUse.clear();
     }
 
 

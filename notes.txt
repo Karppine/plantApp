@@ -9,21 +9,35 @@ kasvissa kannattaa varmaan olla ON DELETE CASCADE, mutta käyttäjissä ei.
 
 
 
-LISÄÄ TRIGGERI MYSQL KANTAAN
-
-
+------------------------------------------------------------------------------------------------------
 
 Käyttöliittymä: (ainaki nyt alkuun että saadan toimimana, ei mitään authia)
 
+unohdetaan käyttäjät nyt alkuun kokonaan.
 -käyttäjä -> ei tarvi omaa näkymää
 
--kasvit -> päänäkymä, listä kasveista ja niiden tiedoista (nimi, viimeinen kastelu/lannoitus, kuvaus), NAPPI jolla lisätä kastelu.
+-PlantView -> crud näkymä kasveista.
 
---> nappula ottaa kasvin/kasvien id:n , ja kysyy oliko lannotetta mukana.
+-WateringView -> kastelu/lannoitus näkymä. (nimi ehkä kanttis vaihtaa.)
+
+
+!LISÄTTÄVÄÄ!
+
+-UUSI: crud näkymä kastelu ja lannoitus tauluille.
+
+ominaisuus peruuttaa kastelu -> transaktiosta ehkä sais toteutettua
+
+lokikirja varmaan kanttis lisätä
+
+------------------------------------------------------------------------------------------------------
 
 
 
--kastelut -> ei tarvetta omalle näkymälle alussa. kastelutauluun lisätään monikoita kasvinäkymän nappulasta.
+
+select name, watering_day, fertilizer from plant left join watering on plant.id = watering.plantId;
+
+
+
 
 
 
@@ -56,5 +70,25 @@ END$$
 
 DELIMITER;
 
+
 trigger lisätty ja toimii!!
 
+
+DELIMITER $$
+
+CREATE TRIGGER update_plant_after_delete
+AFTER DELETE ON watering
+FOR EACH ROW
+BEGIN
+    UPDATE plant
+    SET last_watered = NEW.watering_day
+    WHERE id = NEW.plantId;
+
+    IF NEW.fertilizer THEN
+        UPDATE plant
+        SET last_fertilized = NEW.watering_day
+        WHERE id = NEW.plantId;
+    END IF;
+END$$
+
+DELIMITER;

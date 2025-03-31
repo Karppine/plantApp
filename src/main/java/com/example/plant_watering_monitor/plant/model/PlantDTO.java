@@ -4,6 +4,8 @@ package com.example.plant_watering_monitor.plant.model;
 // hetken oli käytössä mutta revin sen irti jotta @Entity kautta saadaan autobindaukset ui:seen
 /*
 
+import lombok.Data;
+
 @Data
 public class PlantDTO {
     private Integer id;
