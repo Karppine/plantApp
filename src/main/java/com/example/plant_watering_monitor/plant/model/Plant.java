@@ -39,13 +39,13 @@ public class Plant {
 
     @Column(name = "last_fertilized")
     private String last_fertilized;
-/*
 
+/*
     @OneToMany
     @JoinColumn(name = "id")
     private List<Watering> waterings;
-*/
     //private String watered;
+*/
 
 
 }

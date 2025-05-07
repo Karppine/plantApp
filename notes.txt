@@ -71,24 +71,36 @@ END$$
 DELIMITER;
 
 
-trigger lisätty ja toimii!!
-
+ylempi ja alempi trigger lisätty ja toimii!!
 
 DELIMITER $$
 
-CREATE TRIGGER update_plant_after_delete
+CREATE TRIGGER update_plant_after_watering_delete
 AFTER DELETE ON watering
 FOR EACH ROW
 BEGIN
-    UPDATE plant
-    SET last_watered = NEW.watering_day
-    WHERE id = NEW.plantId;
+    -- Declare variables to store the most recent watering and fertilizer use
+    DECLARE recent_watering_day DATE;
+    DECLARE recent_fertilizer_day DATE;
 
-    IF NEW.fertilizer THEN
-        UPDATE plant
-        SET last_fertilized = NEW.watering_day
-        WHERE id = NEW.plantId;
-    END IF;
+    -- Find the most recent watering day for the plant after the deleted row
+    SELECT MAX(watering_day)
+    INTO recent_watering_day
+    FROM watering
+    WHERE plantId = OLD.plantId;
+
+    -- Find the most recent fertilized watering day for the plant
+    SELECT MAX(watering_day)
+    INTO recent_fertilizer_day
+    FROM watering
+    WHERE plantId = OLD.plantId AND fertilizer = TRUE;
+
+    -- Update the plant table with the most recent watering and fertilized data
+    UPDATE plant
+    SET
+        last_watered = recent_watering_day,
+        last_fertilized = recent_fertilizer_day
+    WHERE id = OLD.plantId;
 END$$
 
-DELIMITER;
+DELIMITER ;

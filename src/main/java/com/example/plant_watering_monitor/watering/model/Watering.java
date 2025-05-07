@@ -22,15 +22,18 @@ public class Watering {
     @Column(name = "userId")
     @NotNull
     private Integer userId;
-
-   /* @ManyToOne
-    @JoinColumn(name = "plantId")
-    private Plant plant;
+/*
 
     @ManyToOne
-    @JoinColumn(name = "userId")
-    private User user;*/
+    @JoinColumn(name = "plantId")
+    private Plant plant;
+*/
 
+    /*
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User user;
+*/
     @Column(name = "watering_day")
     private LocalDate watering_day;
 
