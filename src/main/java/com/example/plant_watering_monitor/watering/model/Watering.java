@@ -1,5 +1,6 @@
 package com.example.plant_watering_monitor.watering.model;
 
+import com.example.plant_watering_monitor.plant.model.Plant;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -22,12 +23,10 @@ public class Watering {
     @Column(name = "userId")
     @NotNull
     private Integer userId;
-/*
 
     @ManyToOne
-    @JoinColumn(name = "plantId")
+    @JoinColumn(name = "plantId", insertable=false, updatable=false)
     private Plant plant;
-*/
 
     /*
     @ManyToOne

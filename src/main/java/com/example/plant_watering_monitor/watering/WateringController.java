@@ -2,25 +2,28 @@ package com.example.plant_watering_monitor.watering;
 
 import com.example.plant_watering_monitor.watering.model.Watering;
 import com.example.plant_watering_monitor.watering.services.CreateWateringService;
-import org.springframework.http.HttpStatus;
+import com.example.plant_watering_monitor.watering.services.DeleteWateringService;
+import com.example.plant_watering_monitor.watering.services.GetWateringsService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class WateringController {
 
-    private final WateringRepository repo;
-
     private final CreateWateringService createWateringService;
 
-    public WateringController(WateringRepository wateringRepository, CreateWateringService createWateringService){
+    private final GetWateringsService getWateringsService;
+
+    private final DeleteWateringService deleteWateringService;
+
+    public WateringController(CreateWateringService createWateringService,
+                              GetWateringsService getWateringsService,
+                              DeleteWateringService deleteWateringService) {
         this.createWateringService = createWateringService;
-        this.repo = wateringRepository;
+        this.getWateringsService = getWateringsService;
+        this.deleteWateringService = deleteWateringService;
     }
 
     @PostMapping("/watering")
@@ -28,12 +31,13 @@ public class WateringController {
 
     @GetMapping("/waterings")
     public ResponseEntity<List<Watering>> getWaterings() {
-        var waterings = repo.findAll();
-
-        return ResponseEntity.status(HttpStatus.OK).body(waterings);
+        return getWateringsService.execute(null);
     }
 
-
+    @DeleteMapping("/watering/{id}")
+    public ResponseEntity<Void> deleteWatering(@PathVariable Integer id) {
+        return deleteWateringService.execute(id);
+    }
 
 
 }
