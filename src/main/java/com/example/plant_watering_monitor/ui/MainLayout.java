@@ -39,7 +39,8 @@ public class MainLayout extends AppLayout {
     private void createDrawer() {
         addToDrawer(new VerticalLayout(
                 new RouterLink("Care", WateringView.class),
-                new RouterLink("Plant info", PlantView.class)
+                new RouterLink("Plant info", PlantView.class),
+                new RouterLink("Watering info", WateringInfo.class)
         ));
     }
 }
