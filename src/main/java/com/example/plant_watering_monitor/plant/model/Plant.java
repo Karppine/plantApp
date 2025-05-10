@@ -20,7 +20,7 @@ public class Plant {
     @Column(name = "name")
     private String name;
 
-    @Size(min = 5 , message = ("Description must be over 20 characters long"))
+    @Size(min = 20 , message = ("Description must be over 20 characters long"))
     @Column(name = "description")
     private String description;
 /*
