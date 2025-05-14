@@ -1,9 +1,4 @@
-Annotaatioilla saisi helposti luotua näkymän jossa tietoa kasveista -> kaikki taulun atribuutit sekä relaatiotaulun kastelut listana.
-
-Sama homma käyttäjissä -> helppo saada käyttäjän kaikki kastelut.
-
-Molemmat perjaattessa liittyy kasteluihin mutta tietojen haku tapahtuisi UserRepository ja PlantRepository kautta. Mihin nää kannattaisi projektissa sijoittaa, entä millaset api endpointit.
-
+Tällä hetkellä kasvia ei voi poistaa ellei eka poista ite kaikkia sen kasteluita
 
 kasvissa kannattaa varmaan olla ON DELETE CASCADE, mutta käyttäjissä ei.
 
@@ -29,24 +24,18 @@ ominaisuus peruuttaa kastelu -> transaktiosta ehkä sais toteutettua
 
 lokikirja varmaan kanttis lisätä
 
-------------------------------------------------------------------------------------------------------
-
-
-
-
-select name, watering_day, fertilizer from plant left join watering on plant.id = watering.plantId;
-
-
-
-
-
-
 kastelu modelista puuttuu validointi
 
 plantView:issa osa metodeista hassun nimisä.
 
 
+------------------------------------------------------------------------------------------------------
 
+select name, watering_day, fertilizer from plant left join watering on plant.id = watering.plantId;
+
+
+
+Triggerit jotka koodi olettaa tietokannan sisältävän
 
 https://www.mysqltutorial.org/mysql-triggers/mysql-after-insert-trigger/
 https://www.mysqltutorial.org/mysql-stored-procedure/mysql-delimiter/

@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: spring-boot-app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/plantapp
+    depends_on:
+      - db
+
+  db:
+    image: mysql:latest
+    container_name: mysql-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: juurisalasana
+      MYSQL_DATABASE: plantapp
+      MYSQL_USER: leevi
+      MYSQL_PASSWORD: salasana
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./plantapp_schema.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  db_data:
