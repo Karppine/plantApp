@@ -3,7 +3,6 @@ package com.example.plant_watering_monitor.exceptions;
 import com.example.plant_watering_monitor.plant.model.ErrorResponse;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -52,6 +51,7 @@ public class GlobalExceptionHandler {
         return new ErrorResponse(exception.getMessage());
     }
 
+    // needed for spring boot starter validation to send custom error message
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
